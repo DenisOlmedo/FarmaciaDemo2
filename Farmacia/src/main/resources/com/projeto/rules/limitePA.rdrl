@@ -1,0 +1,15 @@
+package com.projeto.rules;
+
+import java.lang.Number;
+import com.projeto.model.Compra;
+
+rule "limitePA"
+	dialect "mvel"
+	when
+		Compra( principioAtivo == "Calcitrol" )
+		Compra( quantidadeTotal > 10 )
+	then
+		Compra fact0 = new Compra();
+		fact0.setAprovado( "False" );
+		insert( fact0 );
+end

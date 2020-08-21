@@ -1,0 +1,14 @@
+package com.projeto.rules;
+
+import java.lang.Number;
+import com.projeto.model.Compra;
+
+rule "aprovarCompra"
+	dialect "mvel"
+	when
+		Compra( aprovado == "True" )
+	then
+		Compra fact0 = new Compra();
+		fact0.setMensagem( "Compra aprovada com sucesso." );
+		insert( fact0 );
+end

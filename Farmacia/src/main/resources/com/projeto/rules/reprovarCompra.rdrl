@@ -1,0 +1,14 @@
+package com.projeto.rules;
+
+import java.lang.Number;
+import com.projeto.model.Compra;
+
+rule "reprovarCompra"
+	dialect "mvel"
+	when
+		Compra( aprovado == "False" )
+	then
+		Compra fact0 = new Compra();
+		fact0.setMensagem( "Compra reprovada. Limite de quantidade ultrapassado. Reduza a quantidade de produtos e tente novamente." );
+		insert( fact0 );
+end
